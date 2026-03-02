@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flying Game</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background-color: #222;
+      color: #fff;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    canvas {
+      background-color: #111;
+      margin-top: 20px;
+      border: 2px solid #fff;
+    }
+    #score {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Flying Game</h1>
+  <canvas id="gameCanvas" width="400" height="400"></canvas>
+  <p id="score">Score: 0</p>
+
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const player = { x: 50, y: 200, width: 30, height: 30, dy: 0 };
+    const gravity = 0.6;
+    const jump = -10;
+
+    const rocks = [];
+    const rockWidth = 50;
+    const gap = 120;
+    let frame = 0;
+    let score = 0;
+
+    // Game loop
+    function loop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Player movement
+      player.dy += gravity;
+      player.y += player.dy;
+
+      // Draw player
+      ctx.fillStyle = 'lime';
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+
+      // Create rocks periodically
+      if (frame % 100 === 0) {
+        const topHeight = Math.random() * (canvas.height - gap - 50) + 20;
+        rocks.push({
+          x: canvas.width,
+          yTop: 0,
+          heightTop: topHeight,
+          yBottom: topHeight + gap,
+          heightBottom: canvas.height - (topHeight + gap)
+        });
+      }
+
+      // Move and draw rocks
+      ctx.fillStyle = 'brown';
+      for (let i = rocks.length - 1; i >= 0; i--) {
+        rocks[i].x -= 2;
+        // Top rock
+        ctx.fillRect(rocks[i].x, rocks[i].yTop, rockWidth, rocks[i].heightTop);
+        // Bottom rock
+        ctx.fillRect(rocks[i].x, rocks[i].yBottom, rockWidth, rocks[i].heightBottom);
+
+        // Check collision
+        if (
+          player.x + player.width > rocks[i].x &&
+          player.x < rocks[i].x + rockWidth &&
+          (player.y < rocks[i].heightTop || player.y + player.height > rocks[i].yBottom)
+        ) {
+          alert('Game Over! Score: ' + score);
+          resetGame();
+          return;
+        }
+
+        // Increase score if rock passed
+        if (rocks[i].x + rockWidth === player.x) {
+          score++;
+          document.getElementById('score').textContent = 'Score: ' + score;
+        }
+
+        // Remove offscreen rocks
+        if (rocks[i].x + rockWidth < 0) {
+          rocks.splice(i, 1);
+        }
+      }
+
+      // Check boundaries
+      if (player.y + player.height > canvas.height || player.y < 0) {
+        alert('Game Over! Score: ' + score);
+        resetGame();
+        return;
+      }
+
+      frame++;
+      requestAnimationFrame(loop);
+    }
+
+    // Jump on key press
+    document.addEventListener('keydown', (e) => {
+      if (e.key === ' ' || e.key === 'ArrowUp') {
+        player.dy = jump;
+      }
+    });
+
+    // Reset game
+    function resetGame() {
+      player.y = 200;
+      player.dy = 0;
+      rocks.length = 0;
+      score = 0;
+      frame = 0;
+      document.getElementById('score').textContent = 'Score: ' + score;
+      requestAnimationFrame(loop);
+    }
+
+    requestAnimationFrame(loop);
+  </script>
+</body>
+</html>
