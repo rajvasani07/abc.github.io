@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-           background: linear-gradient(to right, #800000, #b22222);
+            background: #000000; /* Black background */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -14,40 +14,42 @@
         }
 
         .card {
-            background-color: white;
+            background-color: #1c1c1c; /* Dark card so it stands out from black */
             padding: 25px;
             border-radius: 15px;
             width: 350px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2); /* light shadow for contrast */
             text-align: center;
         }
 
         h1 {
-            color: #333;
+            color: #ffffff; /* White text */
         }
 
         p {
             font-size: 16px;
             margin: 8px 0;
+            color: #f0f0f0; /* Light gray text for readability */
         }
 
         button {
             margin-top: 15px;
             padding: 10px 15px;
             border: none;
-            background-color: #4facfe;
-            color: white;
+            background-color: #ffffff; /* White button */
+            color: #000000; /* Black text on button */
             border-radius: 8px;
             cursor: pointer;
             font-size: 14px;
+            font-weight: bold;
         }
 
         button:hover {
-            background-color: #00c6ff;
+            background-color: #e0e0e0; /* Slightly gray on hover */
         }
 
         .highlight {
-            color: #4facfe;
+            color: #ffcc00; /* Yellowish highlight for labels */
             font-weight: bold;
         }
     </style>
@@ -59,7 +61,7 @@
         <h1>Student Profile</h1>
 
         <p><span class="highlight">Name:</span> Raj Vasani</p>
-        <p><span class="highlight">Enrollment Number : </span> 25ITUOS144</p>
+        <p><span class="highlight">Enrollment Number:</span> 25ITUOS144</p>
         <p><span class="highlight">Roll No:</span> 144</p>
         <p><span class="highlight">Division:</span> F</p>
         <p><span class="highlight">Batch:</span> f3</p>
@@ -77,5 +79,3 @@
 
 </body>
 </html>
-
-
