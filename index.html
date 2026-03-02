@@ -1,18 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Details</title>
+    <title>My Student Profile</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 15px;
+            width: 350px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 8px 0;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 15px;
+            border: none;
+            background-color: #4facfe;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #00c6ff;
+        }
+
+        .highlight {
+            color: #4facfe;
+            font-weight: bold;
+        }
+    </style>
+
 </head>
 <body>
 
-    <h1>Student Details</h1>
+    <div class="card">
+        <h1>Student Profile</h1>
 
-    <p><strong>Name:</strong> Raj Vasani</p>
-    <p><strong>Roll Number:</strong> 144</p>
-    <p><strong>Division:</strong> A</p>    
-    <p><strong>Batch:</strong> f3</p>
-    <p><strong>College Name:</strong> Dharmsinh Desai University</p>
-    <p><strong>Subject Name:</strong> Hardware Workshop</p>
+        <p><span class="highlight">Name:</span> Your Name</p>
+        <p><span class="highlight">Roll No:</span> 12345</p>
+        <p><span class="highlight">Batch:</span> 2023-2026</p>
+        <p><span class="highlight">Division:</span> A</p>
+        <p><span class="highlight">College:</span> ABC College</p>
+        <p><span class="highlight">Subject:</span> Web Development</p>
+
+        <button onclick="showMessage()">Click Me</button>
+    </div>
+
+    <script>
+        function showMessage() {
+            alert("Welcome to my website! 😊");
+        }
+    </script>
 
 </body>
 </html>
